@@ -6,9 +6,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## 0.12.0 - Unreleased
+## [0.12.0] - 2026-03-21
 ### Added
 - `footnotes` plugin: export `Footnote` type.
+
+### Fixed
+- Footnote plugin doesn't support automatic numbering [#7]
 
 ## [0.11.1] - 2026-01-29
 ### Fixed
@@ -98,7 +101,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [#2]: https://github.com/lumeland/markdown-plugins/issues/2
 [#3]: https://github.com/lumeland/markdown-plugins/issues/3
 [#4]: https://github.com/lumeland/markdown-plugins/issues/4
+[#7]: https://github.com/lumeland/markdown-plugins/issues/7
 
+[0.12.0]: https://github.com/lumeland/markdown-plugins/compare/v0.11.1...v0.12.0
 [0.11.1]: https://github.com/lumeland/markdown-plugins/compare/v0.11.0...v0.11.1
 [0.11.0]: https://github.com/lumeland/markdown-plugins/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/lumeland/markdown-plugins/compare/v0.10.0...v0.10.1

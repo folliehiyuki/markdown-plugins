@@ -53,12 +53,13 @@ export default function footNotes(md: any, userOptions: Partial<Options> = {}) {
       return "";
     }
 
-    const { id, subId, label } = meta;
+    const { id, subId } = meta;
     const attrs = Object.assign({}, options.referenceAttrs, {
       href: `#${options.idPrefix}${id}`,
       id: `${options.referenceIdPrefix}${idSuffix(id, subId)}`,
     } as Record<string, string>);
 
+    const label = subId > 0 ? `${id}:${subId}` : id;
     return options.referenceFn(label, attrs);
   };
 
@@ -200,7 +201,6 @@ export default function footNotes(md: any, userOptions: Partial<Options> = {}) {
       const footnotes = getFootnotes(state);
       const id = footnotes.size + 1;
       const label = id.toString();
-
       const token = state.push("footnote_reference", "", 0);
       token.meta = { id, label, subId: 0 };
 
@@ -318,20 +318,21 @@ export default function footNotes(md: any, userOptions: Partial<Options> = {}) {
     }
 
     const footnotes = getFootnotes(state);
-    data[options.key] = Array.from(footnotes.values()).map((footnote) => {
-      const refIds = Array.from(
-        { length: footnote.subId + 1 },
-        (_, i) => `${options.referenceIdPrefix}${idSuffix(footnote.id, i)}`,
-      );
+    data[options.key] = Array.from(footnotes.values())
+      .map((footnote) => {
+        const refIds = Array.from(
+          { length: footnote.subId + 1 },
+          (_, i) => `${options.referenceIdPrefix}${idSuffix(footnote.id, i)}`,
+        );
 
-      return {
-        id: `${options.idPrefix}${footnote.id}`,
-        refId: refIds.at(-1),
-        refIds,
-        label: footnote.label,
-        content: footnote.content,
-      } satisfies Footnote;
-    });
+        return {
+          id: `${options.idPrefix}${footnote.id}`,
+          refId: refIds.at(-1),
+          refIds,
+          label: footnote.label,
+          content: footnote.content,
+        } satisfies Footnote;
+      });
   });
 }
 
